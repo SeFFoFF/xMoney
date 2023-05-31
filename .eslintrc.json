@@ -4,7 +4,6 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
         "standard-with-typescript",
         "next/core-web-vitals",
         "plugin:@next/next/recommended"
@@ -20,5 +19,9 @@
         "react"
     ],
     "rules": {
+        "indent": [
+            "error",
+            2
+        ]
     }
 }
