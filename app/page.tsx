@@ -9,27 +9,67 @@ const db: IYear[] = [
       {
         name: 'January',
         income: 34256,
-        expenses: 29813
+        expenses: 29813,
+        history: [
+          {
+            date: '01.06.2023',
+            category: 'Food',
+            amount: 50
+          },
+          {
+            date: '01.06.2023',
+            category: 'Rent',
+            amount: 4500
+          }
+        ]
       },
       {
         name: 'February',
         income: 32608,
-        expenses: 29532
+        expenses: 29532,
+        history: [
+          {
+            date: '01.06.2023',
+            category: 'Food',
+            amount: 50
+          }
+        ]
       },
       {
         name: 'March',
         income: 32618,
-        expenses: 57326
+        expenses: 57326,
+        history: [
+          {
+            date: '01.06.2023',
+            category: 'Food',
+            amount: 50
+          }
+        ]
       },
       {
         name: 'April',
         income: 35842,
-        expenses: 34316
+        expenses: 34316,
+        history: [
+          {
+            date: '01.06.2023',
+            category: 'Food',
+            amount: 50
+          }
+        ]
       },
       {
         name: 'May',
         income: 71492,
-        expenses: 28774
+        expenses: 28774,
+        history: [
+          {
+            date: '01.06.2023',
+            category: 'Food',
+            amount: 50
+          }
+        ]
       },
       {
         name: 'June',
@@ -78,7 +118,7 @@ const Home = (): JSX.Element => {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full max-w-1240px'>
       <div className='flex flex-wrap gap-10 p-10'>
         {
           renderMonths(db)
