@@ -13,7 +13,7 @@ export const ExpenseItem = ({ category, date, amount }: ExpenseItemProps): JSX.E
   const [inputValue, setInputValue] = useState<number>(amount)
 
   return (
-    <div className='flex items-center justify-between border-b py-1'>
+    <div className='flex items-center justify-between border-b pb-1'>
       <p className='w-150px'>{category}</p>
       <strong>{date}</strong>
       <CustomInput

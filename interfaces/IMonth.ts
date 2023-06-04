@@ -1,5 +1,5 @@
 interface IHistory {
-  date: string
+  date: string | number
   category: string
   amount: number
 }

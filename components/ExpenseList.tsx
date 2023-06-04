@@ -53,7 +53,7 @@ const history = [
 
 export const ExpenseList = (): JSX.Element => {
   return (
-    <div className='flex flex-col gap-5 h-[78%] overflow-y-auto bg-white rounded-lg p-10'>
+    <div className='flex flex-col gap-1 h-[78%] overflow-y-auto bg-white rounded-lg p-10'>
       {
         history.map(item => <ExpenseItem key={item.date} category={item.category} date={item.date} amount={item.amount}/>)
       }

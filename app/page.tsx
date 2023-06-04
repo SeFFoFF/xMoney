@@ -12,14 +12,49 @@ const db: IYear[] = [
         expenses: 29813,
         history: [
           {
-            date: '01.06.2023',
-            category: 'Food',
+            date: 1,
+            category: 'Housing expenses',
             amount: 50
           },
           {
-            date: '01.06.2023',
-            category: 'Rent',
-            amount: 4500
+            date: 2,
+            category: 'Food',
+            amount: 500
+          },
+          {
+            date: 3,
+            category: 'Transportation',
+            amount: 1000
+          },
+          {
+            date: 4,
+            category: 'Health',
+            amount: 320
+          },
+          {
+            date: 5,
+            category: 'Clothing',
+            amount: 2000
+          },
+          {
+            date: 6,
+            category: 'Entertainment',
+            amount: 5150
+          },
+          {
+            date: 7,
+            category: 'Education',
+            amount: 12500
+          },
+          {
+            date: 8,
+            category: 'Debts and loans',
+            amount: 100
+          },
+          {
+            date: 9,
+            category: 'Gifts',
+            amount: 1000
           }
         ]
       },
@@ -29,9 +64,24 @@ const db: IYear[] = [
         expenses: 29532,
         history: [
           {
-            date: '01.06.2023',
-            category: 'Food',
+            date: 1,
+            category: 'Housing expenses',
             amount: 50
+          },
+          {
+            date: 2,
+            category: 'Food',
+            amount: 500
+          },
+          {
+            date: 3,
+            category: 'Transportation',
+            amount: 1000
+          },
+          {
+            date: 4,
+            category: 'Health',
+            amount: 320
           }
         ]
       },
@@ -41,9 +91,19 @@ const db: IYear[] = [
         expenses: 57326,
         history: [
           {
-            date: '01.06.2023',
-            category: 'Food',
-            amount: 50
+            date: 4,
+            category: 'Health',
+            amount: 320
+          },
+          {
+            date: 5,
+            category: 'Clothing',
+            amount: 2000
+          },
+          {
+            date: 6,
+            category: 'Entertainment',
+            amount: 5150
           }
         ]
       },
@@ -53,9 +113,29 @@ const db: IYear[] = [
         expenses: 34316,
         history: [
           {
-            date: '01.06.2023',
-            category: 'Food',
+            date: 1,
+            category: 'Housing expenses',
             amount: 50
+          },
+          {
+            date: 2,
+            category: 'Food',
+            amount: 500
+          },
+          {
+            date: 3,
+            category: 'Transportation',
+            amount: 1000
+          },
+          {
+            date: 8,
+            category: 'Debts and loans',
+            amount: 100
+          },
+          {
+            date: 9,
+            category: 'Gifts',
+            amount: 1000
           }
         ]
       },
@@ -65,9 +145,24 @@ const db: IYear[] = [
         expenses: 28774,
         history: [
           {
-            date: '01.06.2023',
+            date: 2,
             category: 'Food',
-            amount: 50
+            amount: 500
+          },
+          {
+            date: 3,
+            category: 'Transportation',
+            amount: 1000
+          },
+          {
+            date: 6,
+            category: 'Entertainment',
+            amount: 5150
+          },
+          {
+            date: 7,
+            category: 'Education',
+            amount: 12500
           }
         ]
       },

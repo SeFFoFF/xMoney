@@ -22,6 +22,7 @@ export const MonthForm = (): JSX.Element => {
     else setIsButtonDisabled(prevState => false)
   }, [selectValue, inputValue])
 
+  // TODO ADD NEW ITEM TO THE ARRAY
   const handleAddButton = (): void => {
     try {
       alert(`You added ${inputValue} uah to the ${selectValue.label} category`)
