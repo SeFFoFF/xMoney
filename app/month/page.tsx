@@ -1,6 +1,6 @@
 import React from 'react'
 import { MonthForm } from '@components/MonthForm'
-import { ExpenseList } from '@components/ExpenseList'
+import { ExpensesHistory } from '@components/ExpensesHistory'
 
 const Month = (): JSX.Element => {
   return (
@@ -9,7 +9,7 @@ const Month = (): JSX.Element => {
 
         <div className='flex flex-col justify-between gap-y-10 w-full h-full'>
           <MonthForm />
-          <ExpenseList />
+          <ExpensesHistory />
         </div>
 
         <div className='w-full h-full bg-white rounded-lg p-10'>

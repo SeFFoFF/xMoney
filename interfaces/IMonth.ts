@@ -1,5 +1,8 @@
-interface IHistory {
-  date: string | number
+import { type Dayjs } from 'dayjs'
+
+export interface IHistory {
+  id: string
+  date: Dayjs | string
   category: string
   amount: number
 }

@@ -1,7 +1,12 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addExpense } from '@redux/features/expense/expensesSlice'
 import { CustomSelect, CustomInput, CustomButton } from '@components'
+import { v4 as uuid } from 'uuid'
+import { type IHistory } from '@interfaces/IMonth'
+import dayjs from 'dayjs'
 
 const isFieldsEmpty = (firstField, secondField): boolean => {
   return firstField.value === 'selectTheCategory' || secondField === 0 || secondField === '' || secondField === '0'
@@ -17,6 +22,10 @@ export const MonthForm = (): JSX.Element => {
   const [inputValue, setInputValue] = useState<number>(0)
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
 
+  const dispatch = useDispatch()
+
+  const uniqueId = uuid()
+
   useEffect(() => {
     if (isFieldsEmpty(selectValue, inputValue)) setIsButtonDisabled(prevState => true)
     else setIsButtonDisabled(prevState => false)
@@ -25,7 +34,13 @@ export const MonthForm = (): JSX.Element => {
   // TODO ADD NEW ITEM TO THE ARRAY
   const handleAddButton = (): void => {
     try {
-      alert(`You added ${inputValue} uah to the ${selectValue.label} category`)
+      const expense: IHistory = {
+        id: uniqueId,
+        date: dayjs(),
+        category: selectValue.label,
+        amount: inputValue
+      }
+      dispatch(addExpense(expense))
       setInputValue(0)
     } catch (e) {
       alert(e)
