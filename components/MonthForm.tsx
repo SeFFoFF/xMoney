@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addExpense } from '@redux/features/expense/expensesSlice'
+import { addExpense } from '@redux/features/expenses/expenses.slice'
 import { CustomSelect, CustomInput, CustomButton } from '@components'
 import { v4 as uuid } from 'uuid'
 import { type IHistory } from '@interfaces/IMonth'

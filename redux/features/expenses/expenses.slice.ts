@@ -1,15 +1,15 @@
 'use client'
 
 import { createSlice } from '@reduxjs/toolkit'
-import { type IHistory } from '@interfaces/IMonth'
-import { type PayloadAction } from '@node_modules/@reduxjs/toolkit'
+import { type PayloadAction } from '@reduxjs/toolkit'
 import { type RootState } from '@redux/store'
+import { type IHistory } from '@interfaces/IMonth'
 
-interface IExpense {
+interface IInitialExpensesState {
   history: IHistory[]
 }
 
-const initialState: IExpense = {
+const initialState: IInitialExpensesState = {
   history: [
     {
       id: 'b5060021-35f5-473e-bc28-bdc89a35ce6b',
@@ -54,14 +54,14 @@ export const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
   reducers: {
-    addExpense: (state: any, action: PayloadAction<any>) => {
-      return { history: [...state.history, action.payload] }
+    addExpense: (state: IInitialExpensesState, action: PayloadAction<IHistory>) => {
+      state.history.push(action.payload)
     },
-    updateExpense: (state: IExpense, action: PayloadAction<any>) => {
+    updateExpense: (state: IInitialExpensesState, action: PayloadAction<any>) => {
       return state
     },
-    removeExpense: (state: IExpense, action: PayloadAction<any>) => {
-      return { history: state.history.filter(item => item.date !== action.payload) }
+    removeExpense: (state: IInitialExpensesState, action: PayloadAction<string>) => {
+      return { history: state.history.filter(item => item.id !== action.payload) }
     }
   }
 })

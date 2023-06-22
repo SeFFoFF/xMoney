@@ -3,7 +3,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { ExpenseItem } from '@components/ExpenseItem'
-import { selectExpense } from '@redux/features/expense/expensesSlice'
+import { selectExpense } from '@redux/features/expenses/expenses.slice'
 
 export const ExpensesHistory = (): JSX.Element => {
   const expenses = useSelector(selectExpense)
