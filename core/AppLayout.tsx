@@ -13,12 +13,12 @@ const AppLayout = ({ children }): JSX.Element => {
 
   return (
     <Provider store={store}>
-      <Layout className='min-h-screen'>
+      <Layout style={{ minHeight: '100vh' }}>
         <SideBar/>
         <Layout>
-          <Header className='p-0' style={{ background: colorBgContainer }} />
-          <Content className='m-16px'>
-            <div className='min-h-360px p-24px' style={{ background: colorBgContainer }}>
+          <Header style={{ padding: 0, background: colorBgContainer }} />
+          <Content style={{ margin: '16px' }}>
+            <div style={{ padding: '24px', minHeight: '360px', background: colorBgContainer }}>
               { children }
             </div>
           </Content>

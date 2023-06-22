@@ -10,7 +10,7 @@ export const metadata = {
 const RootLayout = ({ children }): JSX.Element => {
   return (
     <html lang="eu">
-      <body className="">
+      <body>
         <AppLayout>
           { children }
         </AppLayout>
