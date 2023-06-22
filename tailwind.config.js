@@ -7,6 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      margin: {
+        '16px': '16px'
+      },
+      padding: {
+        '24px': '24px'
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -22,6 +28,9 @@ module.exports = {
       height: {
         'month-card': '160px',
         header: '100px'
+      },
+      minHeight: {
+        '360px': '360px'
       },
       spacing: {
         '10px': '10px',
