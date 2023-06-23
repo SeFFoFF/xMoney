@@ -1,10 +1,11 @@
 'use client'
 
 import React from 'react'
-import { Col, Row, Card } from 'antd'
+import { Col, Row } from 'antd'
 import { type IYear } from '@interfaces/IYear'
+import MonthCard from '@components/MonthCard'
 
-// add id to history
+// TODO add id to history
 const db: IYear[] = [
   {
     year: 2023,
@@ -215,17 +216,17 @@ export const MonthsGrid = (): JSX.Element => {
   const renderMonthCards = (): JSX.Element[] => {
     return db[0].months.map(month => (
       <Col key={month.name} span={6}>
-        <Card title={month.name} bordered={true}>
-          <p>{month.income}</p>
-          <p>{month.expenses}</p>
-        </Card>
+        <MonthCard name={month.name} income={month.income} expenses={month.expenses} />
       </Col>
     ))
   }
 
   return (
-    <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
-      { renderMonthCards() }
-    </Row>
+    <div className='home-screen flex flex-col gap-y-16'>
+      <h2>May</h2>
+      <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
+        { renderMonthCards() }
+      </Row>
+    </div>
   )
 }

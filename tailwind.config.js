@@ -26,7 +26,7 @@ module.exports = {
         'month-card': '250px'
       },
       height: {
-        'month-card': '160px',
+        'month-card': '125px',
         header: '100px'
       },
       minHeight: {
@@ -34,6 +34,7 @@ module.exports = {
       },
       spacing: {
         '10px': '10px',
+        '16px': '16px',
         '20px': '20px',
         '30px': '30px',
         '40px': '40px',

@@ -18,7 +18,7 @@ const AppLayout = ({ children }): JSX.Element => {
         <Layout>
           <Header style={{ padding: 0, background: colorBgContainer }} />
           <Content style={{ margin: '16px' }}>
-            <div style={{ padding: '24px', minHeight: '360px', background: colorBgContainer }}>
+            <div style={{ minHeight: '360px', height: '100%', maxHeight: 'calc(100vh - 100px)' }}>
               { children }
             </div>
           </Content>

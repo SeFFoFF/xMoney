@@ -5,16 +5,17 @@ import dayjs, { type Dayjs } from 'dayjs'
 import { CustomInput } from '@components/CustomInput'
 
 interface ExpenseItemProps {
-  date: Dayjs | string
+  date: Dayjs | string | number
   category: string
   amount: number
 }
 
 export const ExpenseItem = ({ category, date, amount }: ExpenseItemProps): JSX.Element => {
-  const [inputValue, setInputValue] = useState<number>(amount)
+  const [inputValue, setInputValue] = useState(amount)
 
   const formattedDate = dayjs(date).format('D MMMM')
 
+  // TODO CHANGE CUSTOM INPUT TO INPUT ANT DESIGN
   return (
     <div className='flex items-center justify-between border-b pb-1'>
       <p className='w-150px'>{category}</p>

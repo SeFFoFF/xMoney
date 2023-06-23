@@ -4,15 +4,15 @@ import { ExpensesHistory } from '@components/ExpensesHistory'
 
 const Month = (): JSX.Element => {
   return (
-    <div className='w-1240px max-w-full min-h-640px h-640px'>
-      <div className='flex gap-10 p-10 h-full'>
+    <div className='h-full'>
+      <div className='flex gap-[16px] h-full'>
 
-        <div className='flex flex-col justify-between gap-y-10 w-full h-full'>
+        <div className='flex flex-col justify-between gap-y-10 w-1/2 h-full bg-white rounded-lg p-24px'>
           <MonthForm />
           <ExpensesHistory />
         </div>
 
-        <div className='w-full h-full bg-white rounded-lg p-10'>
+        <div className='w-1/2 h-full bg-white rounded-lg p-24px'>
           STATS
         </div>
 
