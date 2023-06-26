@@ -1,12 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
 import { Card } from 'antd'
-import { type IMonth } from '@interfaces/IMonth'
 
-const MonthCard = ({ name, income, expenses }: IMonth): JSX.Element => {
+interface IMonthCardProps {
+  name: string
+  income: number
+  expenses: number
+  currentYear: string
+}
+
+const MonthCard = ({ name, income, expenses, currentYear }: IMonthCardProps): JSX.Element => {
   const hasMonetaryTransactions: boolean = (income !== 0) && (expenses !== 0)
   return (
-    <Link href='/month'>
+    <Link href={`/${currentYear}/${name}`}>
       <Card title={name} bordered={true} hoverable className='h-month-card'>
         {
           hasMonetaryTransactions &&

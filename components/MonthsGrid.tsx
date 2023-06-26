@@ -94,14 +94,14 @@ const MonthsGrid = ({ year, currentYear }: IMonthsGridProps): JSX.Element => {
     const renderArray = year !== undefined ? year.months : months
     return renderArray.map(month => (
       <Col key={month.name} span={6}>
-        <MonthCard name={month.name} income={month.income} expenses={month.expenses} />
+        <MonthCard name={month.name} income={month.income} expenses={month.expenses} currentYear={currentYear} />
       </Col>
     ))
   }
 
   const onArrowButtonClick = (direction: string): void => {
-    if (direction === 'left') router.push(`/years/${parseInt(currentYear) - 1}`)
-    if (direction === 'right') router.push(`/years/${parseInt(currentYear) + 1}`)
+    if (direction === 'left') router.push(`/${parseInt(currentYear) - 1}`)
+    if (direction === 'right') router.push(`/${parseInt(currentYear) + 1}`)
   }
 
   return (

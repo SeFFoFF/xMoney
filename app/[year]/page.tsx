@@ -3,7 +3,7 @@ import MonthsGrid from '@components/MonthsGrid'
 import { type IYear } from '@interfaces'
 
 async function getYear (year: number): Promise<IYear> {
-  const res = await fetch(`http://localhost:3000/api/years/${year}`, {
+  const res = await fetch(`http://localhost:3000/api/${year}`, {
     cache: 'no-store'
   })
 
