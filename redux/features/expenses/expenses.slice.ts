@@ -3,7 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { type PayloadAction } from '@reduxjs/toolkit'
 import { type RootState } from '@redux/store'
-import { type IHistory } from '@interfaces/IMonth'
+import { type IHistory } from '@interfaces/IHistory'
 
 interface IInitialExpensesState {
   history: IHistory[]
