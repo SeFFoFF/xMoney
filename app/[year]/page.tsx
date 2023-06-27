@@ -2,7 +2,7 @@ import React from 'react'
 import MonthsGrid from '@components/MonthsGrid'
 import { type IYear } from '@interfaces'
 
-async function getYear (year: number): Promise<IYear> {
+async function getYear (year: number): Promise<IYear | null> {
   const res = await fetch(`http://localhost:3000/api/${year}`, {
     cache: 'no-store'
   })
@@ -10,9 +10,7 @@ async function getYear (year: number): Promise<IYear> {
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-
-  const data: IYear[] = await res.json()
-  return data[0]
+  return await res.json()
 }
 
 const Year = async ({ params }): Promise<JSX.Element> => {

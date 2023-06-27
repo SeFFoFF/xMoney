@@ -1,20 +1,21 @@
 'use client'
 
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { selectExpense } from '@redux/features/expenses/expenses.slice'
 import { ExpenseItem } from '@components/ExpenseItem'
+import { type IHistory } from '@interfaces'
 
-export const ExpensesHistory = (): JSX.Element => {
-  const expenses = useSelector(selectExpense)
+interface IExpensesHistoryProps {
+  history: IHistory[] | null
+}
 
+export const ExpensesHistory = ({ history }: IExpensesHistoryProps): JSX.Element => {
   // TODO CREATE PLACEHOLDER FOR THE EMPTY HISTORY
+  if (history === null) return <div>No expenses yet</div>
+
   return (
     <div className='flex flex-col gap-1 h-max overflow-y-auto bg-white rounded-lg'>
       {
-        expenses.length !== 0
-          ? expenses.map(item => <ExpenseItem key={item.id} category={item.category} date={item.date} amount={item.amount}/>)
-          : <div>No expenses yet</div>
+        history.map(item => <ExpenseItem key={item._id} category={item.category} date={item.date} amount={item.amount}/>)
       }
     </div>
   )
