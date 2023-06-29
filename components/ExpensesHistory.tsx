@@ -1,21 +1,36 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ExpenseItem } from '@components/ExpenseItem'
-import { type IHistory } from '@interfaces'
+import { useTypedSelector, useActions } from '@redux/hooks'
+import { selectExpensesHistory } from '@redux/features/expenses/expensesHistory.slice'
 
 interface IExpensesHistoryProps {
-  history: IHistory[] | null
+  dateInfo: {
+    year: number
+    month: string
+  }
 }
 
-export const ExpensesHistory = ({ history }: IExpensesHistoryProps): JSX.Element => {
+export const ExpensesHistory = ({ dateInfo }: IExpensesHistoryProps): JSX.Element => {
+  const { expensesHistory, isLoading, error } = useTypedSelector(selectExpensesHistory)
+
+  const { getMonth } = useActions()
+
+  useEffect(() => {
+    getMonth(dateInfo)
+  }, [dateInfo.month])
+
   // TODO CREATE PLACEHOLDER FOR THE EMPTY HISTORY
-  if (history === null) return <div>No expenses yet</div>
+  if (expensesHistory?.length === 0) return <div>No expenses yet</div>
+
+  // TODO CREATE LOADING SPINNER
+  if (isLoading) return <div>Loading...</div>
 
   return (
     <div className='flex flex-col gap-1 h-max overflow-y-auto bg-white rounded-lg'>
       {
-        history.map(item => <ExpenseItem key={item._id} category={item.category} date={item.date} amount={item.amount}/>)
+        expensesHistory?.map(item => <ExpenseItem key={item._id ?? item.date} category={item.category} date={item.date} amount={item.amount}/>)
       }
     </div>
   )

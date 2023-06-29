@@ -9,6 +9,8 @@ export const GET = async (request, { params }): Promise<NextResponse<IMonth | nu
 
     const year = await Year.findOne()
       .where('year').equals(params.year)
+      // TODO get month by user_id
+      .where('user_id').equals('1')
 
     if (year === null) return new NextResponse(JSON.stringify(null))
 
@@ -20,13 +22,13 @@ export const GET = async (request, { params }): Promise<NextResponse<IMonth | nu
   }
 }
 
-export const PUT = async (request): Promise<NextResponse<unknown>> => {
+export const PUT = async (request): Promise<NextResponse<string>> => {
   const body = await request.json()
 
   try {
     await connectionToMongo()
 
-    const updatedDocument = await Year.findOneAndUpdate(
+    await Year.findOneAndUpdate(
       { user_id: body.userId, year: body.year },
       { $set: { months: body.months } },
       { new: true }

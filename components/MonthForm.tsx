@@ -1,13 +1,12 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-// import { useDispatch } from 'react-redux'
-// import { addExpense } from '@redux/features/expenses/expenses.slice'
 import { Button, Select, Typography } from 'antd'
 import dayjs from 'dayjs'
 import { Input } from '@components/Input'
-import { type IHistory, type IMonth, type IYear } from '@interfaces'
 import { getMonthNumber } from '@utils/getMonthNumber'
+import { useActions } from '@redux/hooks'
+import { type IHistory, type IMonth, type IYear } from '@interfaces'
 
 const { Title } = Typography
 const { Option } = Select
@@ -29,7 +28,7 @@ export const MonthForm = ({ year, dateInfo }: IMonthFormProps): JSX.Element => {
   const [inputValue, setInputValue] = useState(0)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
-  // const dispatch = useDispatch()
+  const { addExpense } = useActions()
 
   useEffect(() => {
     if (isFieldsEmpty(selectValue, inputValue)) setIsButtonDisabled(prevState => true)
@@ -59,6 +58,7 @@ export const MonthForm = ({ year, dateInfo }: IMonthFormProps): JSX.Element => {
         return month
       })
 
+      // TODO replace userId to real userId
       const userId: string = '1'
 
       try {
@@ -74,7 +74,8 @@ export const MonthForm = ({ year, dateInfo }: IMonthFormProps): JSX.Element => {
         console.error(error)
       }
 
-      // dispatch(addExpense(expense))
+      addExpense(expense)
+
       setInputValue(0)
     } catch (e) {
       alert(e)

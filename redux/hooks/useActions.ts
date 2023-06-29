@@ -2,13 +2,15 @@ import { useMemo } from 'react'
 import { bindActionCreators } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 
-// import * as expensesActions from '@redux/features/expenses/expensesSlice.actions'
+import { actions as expensesHistoryActions } from '@redux/features/expenses/expensesHistory.slice'
+import * as expensesHistoryAsyncActions from '@redux/features/expenses/expensesHistory.actions'
 
 const rootActions = {
-  // ...expensesActions
+  ...expensesHistoryActions,
+  ...expensesHistoryAsyncActions
 }
 
-export const useActions = (): any => {
+export const useActions = () => {
   const dispatch = useDispatch()
 
   return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])

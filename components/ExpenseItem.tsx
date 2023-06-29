@@ -15,6 +15,8 @@ export const ExpenseItem = ({ category, date, amount }: ExpenseItemProps): JSX.E
 
   const formattedDate = dayjs(date).format('D MMMM')
 
+  // TODO create UPDATE and DELETE logic
+
   // TODO CHANGE CUSTOM INPUT TO INPUT ANT DESIGN
   return (
     <div className='flex items-center justify-between border-b pb-1'>

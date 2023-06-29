@@ -1,13 +1,15 @@
 'use client'
 
-import { configureStore } from '@reduxjs/toolkit'
-import expenseReducer from '@redux/features/expenses/expenses.slice'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { reducer } from '@redux/features/expenses/expensesHistory.slice'
+
+const reducers = combineReducers({
+  expensesHistory: reducer
+})
 
 export const store = configureStore({
-  reducer: {
-    expense: expenseReducer
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+  reducer: reducers,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 })
 
 export type RootState = ReturnType<typeof store.getState>
