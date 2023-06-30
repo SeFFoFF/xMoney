@@ -1,9 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Button, Select, Typography } from 'antd'
+import { Button, InputNumber, Select, Typography } from 'antd'
 import dayjs from 'dayjs'
-import { Input } from '@components/Input'
 import { getMonthNumber } from '@utils/getMonthNumber'
 import { useActions } from '@redux/hooks'
 import { type IHistory, type IMonth, type IYear } from '@interfaces'
@@ -103,9 +102,9 @@ export const MonthForm = ({ year, dateInfo }: IMonthFormProps): JSX.Element => {
           <Option value="Debts and loans">Debts and loans</Option>
           <Option value="Gifts">Gifts</Option>
         </Select>
-        <Input
+        <InputNumber
           className='w-1/2'
-          type='number'
+          min='1'
           defaultValue={null}
           value={inputValue}
           onChange={setInputValue}

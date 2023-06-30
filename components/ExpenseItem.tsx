@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import dayjs, { type Dayjs } from 'dayjs'
-import { CustomInput } from '@components/CustomInput'
+import { InputWithUpdate } from '@components/InputWithUpdate'
 
 interface ExpenseItemProps {
   date: Dayjs | string | number
@@ -16,18 +16,18 @@ export const ExpenseItem = ({ category, date, amount }: ExpenseItemProps): JSX.E
   const formattedDate = dayjs(date).format('D MMMM')
 
   // TODO create UPDATE and DELETE logic
+  // TODO create success popup
 
-  // TODO CHANGE CUSTOM INPUT TO INPUT ANT DESIGN
   return (
     <div className='w-full flex items-center justify-between'>
       <p className='w-150px'>{category}</p>
       <strong>{formattedDate}</strong>
-      <CustomInput
-        className='w-100px'
+      <InputWithUpdate
         type='number'
+        className='w-100px'
+        defaultValue={amount}
         value={inputValue}
-        setState={setInputValue}
-        needToUpdate={true}
+        setValue={setInputValue}
       />
     </div>
   )
