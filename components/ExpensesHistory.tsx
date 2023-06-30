@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { ExpenseItem } from '@components/ExpenseItem'
 import { useTypedSelector, useActions } from '@redux/hooks'
 import { selectExpensesHistory } from '@redux/features/expenses/expensesHistory.slice'
+import { List } from 'antd'
 
 interface IExpensesHistoryProps {
   dateInfo: {
@@ -19,19 +20,24 @@ export const ExpensesHistory = ({ dateInfo }: IExpensesHistoryProps): JSX.Elemen
 
   useEffect(() => {
     getMonth(dateInfo)
-  }, [dateInfo.month])
+  }, [dateInfo.year, dateInfo.month])
 
-  // TODO CREATE PLACEHOLDER FOR THE EMPTY HISTORY
-  if (expensesHistory?.length === 0) return <div>No expenses yet</div>
-
-  // TODO CREATE LOADING SPINNER
-  if (isLoading) return <div>Loading...</div>
+  if (!isLoading && (error != null)) {
+    return <div>{error}</div>
+  }
 
   return (
-    <div className='flex flex-col gap-1 h-max overflow-y-auto bg-white rounded-lg'>
-      {
-        expensesHistory?.map(item => <ExpenseItem key={item._id ?? item.date} category={item.category} date={item.date} amount={item.amount}/>)
-      }
+    <div className='flex flex-col gap-1 h-max overflow-y-auto bg-white rounded-lg pr-3'>
+      <List
+        loading={isLoading}
+        itemLayout="horizontal"
+        dataSource={expensesHistory}
+        renderItem={(item) => (
+          <List.Item>
+            <ExpenseItem key={item._id ?? item.date} category={item.category} date={item.date} amount={item.amount}/>
+          </List.Item>
+        )}
+      />
     </div>
   )
 }

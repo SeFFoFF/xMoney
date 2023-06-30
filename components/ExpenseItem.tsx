@@ -19,7 +19,7 @@ export const ExpenseItem = ({ category, date, amount }: ExpenseItemProps): JSX.E
 
   // TODO CHANGE CUSTOM INPUT TO INPUT ANT DESIGN
   return (
-    <div className='flex items-center justify-between border-b pb-1'>
+    <div className='w-full flex items-center justify-between'>
       <p className='w-150px'>{category}</p>
       <strong>{formattedDate}</strong>
       <CustomInput

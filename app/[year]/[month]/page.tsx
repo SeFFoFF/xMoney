@@ -28,7 +28,7 @@ const Month = async ({ params }): Promise<JSX.Element> => {
     <div className='month-screen h-full'>
       <div className='flex gap-[16px] h-full'>
 
-        <div className='flex flex-col justify-between gap-y-10 w-1/2 h-full bg-white rounded-lg p-24px'>
+        <div className='flex flex-col gap-y-10 w-1/2 h-full bg-white rounded-lg p-24px'>
           <MonthForm year={currentYear} dateInfo={dateInfo} />
           <ExpensesHistory dateInfo={dateInfo} />
         </div>
