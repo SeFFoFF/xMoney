@@ -9,9 +9,10 @@ interface IInputProps {
   defaultValue: number | null
   value: number
   setValue: (prevState: number) => void
+  setNeedToShowMessage: (prevState: boolean) => void
 }
 
-export const InputWithUpdate = ({ className, defaultValue, value, setValue }: IInputProps): JSX.Element => {
+export const InputWithUpdate = ({ className, defaultValue, value, setValue, setNeedToShowMessage }: IInputProps): JSX.Element => {
   const [initialValue, setInitialValue] = useState(value)
   const [newValue, setNewValue] = useState(value)
   const [isRequestToUpdate, setIsRequestToUpdate] = useState(false)
@@ -31,12 +32,13 @@ export const InputWithUpdate = ({ className, defaultValue, value, setValue }: II
     const isInputValueEqualToInitialValue = parseInt(inputRef.current?.value) === initialValue
 
     if (isRequestToUpdate && !isInputValueEqualToInitialValue) {
-      alert(`
-          REQUEST
-          Value switched to the ${newValue}
-      `)
-      setValue(newValue)
-      setInitialValue(newValue)
+      try {
+        setValue(newValue)
+        setInitialValue(newValue)
+        setNeedToShowMessage(prevState => true)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -44,6 +46,7 @@ export const InputWithUpdate = ({ className, defaultValue, value, setValue }: II
     ref={inputRef}
     className={className}
     min='1'
+    controls={false}
     defaultValue={defaultValue}
     value={value}
     onChange={onInputChange}

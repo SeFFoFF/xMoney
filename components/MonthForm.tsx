@@ -105,6 +105,7 @@ export const MonthForm = ({ year, dateInfo }: IMonthFormProps): JSX.Element => {
         <InputNumber
           className='w-1/2'
           min='1'
+          controls={false}
           defaultValue={null}
           value={inputValue}
           onChange={setInputValue}
