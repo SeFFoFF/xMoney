@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { ExpenseItem } from '@components/ExpenseItem'
+import { Button, List, Result } from 'antd'
 import { useTypedSelector, useActions } from '@redux/hooks'
-import { selectExpensesHistory } from '@redux/features/expenses/expensesHistory.slice'
-import { List } from 'antd'
+import { ExpenseItem } from '@components/ExpenseItem'
+import { selectMonth } from '@redux/features/month/month.slice'
+import { useRouter } from '@node_modules/next/navigation'
 
 interface IExpensesHistoryProps {
   dateInfo: {
@@ -14,16 +15,21 @@ interface IExpensesHistoryProps {
 }
 
 export const ExpensesHistory = ({ dateInfo }: IExpensesHistoryProps): JSX.Element => {
-  const { expensesHistory, isLoading, error } = useTypedSelector(selectExpensesHistory)
-
+  const router = useRouter()
+  const { month, error, isLoading } = useTypedSelector(selectMonth)
   const { getMonth } = useActions()
 
   useEffect(() => {
     getMonth(dateInfo)
   }, [dateInfo.year, dateInfo.month])
 
-  if (!isLoading && (error != null)) {
-    return <div>{error}</div>
+  if (!isLoading && (Boolean(error))) {
+    return <Result
+      status="500"
+      title="500"
+      subTitle="Sorry, something went wrong."
+      extra={<Button onClick={() => { router.push('/') }}>Back to Home</Button>}
+    />
   }
 
   return (
@@ -31,10 +37,10 @@ export const ExpensesHistory = ({ dateInfo }: IExpensesHistoryProps): JSX.Elemen
       <List
         loading={isLoading}
         itemLayout="horizontal"
-        dataSource={expensesHistory}
+        dataSource={month?.history}
         renderItem={(item) => (
           <List.Item>
-            <ExpenseItem key={item._id ?? item.date} category={item.category} date={item.date} amount={item.amount}/>
+            <ExpenseItem key={item._id ?? item.date} item={item} category={item.category} date={item.date} amount={item.amount}/>
           </List.Item>
         )}
       />

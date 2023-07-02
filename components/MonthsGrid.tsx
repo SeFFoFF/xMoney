@@ -4,6 +4,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { Button, Col, Row } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { useActions } from '@redux/hooks'
 import MonthCard from '@components/MonthCard'
 import { type IYear, type IMonth } from '@interfaces'
 
@@ -96,24 +97,28 @@ const months: IMonth[] = [
 
 interface IMonthsGridProps {
   year: IYear | null
-  currentYear: string
+  numberOfYear: number
 }
 
-const MonthsGrid = ({ year, currentYear }: IMonthsGridProps): JSX.Element => {
+const MonthsGrid = ({ year, numberOfYear }: IMonthsGridProps): JSX.Element => {
   const router = useRouter()
+  const { setYear, setNumberOfYear } = useActions()
+
+  setNumberOfYear(numberOfYear)
+  setYear(year)
 
   const renderMonthCards = (): JSX.Element[] => {
     const renderArray = year !== null ? year.months : months
     return renderArray.map(month => (
       <Col key={month._id} span={6}>
-        <MonthCard name={month.name} income={month.income} expenses={month.expenses} currentYear={currentYear} />
+        <MonthCard monthName={month.name} income={month.income} expenses={month.expenses} />
       </Col>
     ))
   }
 
   const onArrowButtonClick = (direction: string): void => {
-    if (direction === 'left') router.push(`/${parseInt(currentYear) - 1}`)
-    if (direction === 'right') router.push(`/${parseInt(currentYear) + 1}`)
+    if (direction === 'left') router.push(`/${numberOfYear - 1}`)
+    if (direction === 'right') router.push(`/${numberOfYear + 1}`)
   }
 
   return (
@@ -123,7 +128,7 @@ const MonthsGrid = ({ year, currentYear }: IMonthsGridProps): JSX.Element => {
           <LeftOutlined />
         </Button>
 
-        <h2 className='text-[30px]'>{currentYear}</h2>
+        <h2 className='text-[30px]'>{numberOfYear}</h2>
 
         <Button type="text" onClick={() => { onArrowButtonClick('right') }}>
           <RightOutlined/>

@@ -1,19 +1,22 @@
 import React from 'react'
 import Link from 'next/link'
 import { Card } from 'antd'
+import { useTypedSelector } from '@redux/hooks'
+import { selectDate } from '@redux/features/date/date.slice'
 
 interface IMonthCardProps {
-  name: string
+  monthName: string
   income: number
   expenses: number
-  currentYear: string
 }
 
-const MonthCard = ({ name, income, expenses, currentYear }: IMonthCardProps): JSX.Element => {
+const MonthCard = ({ monthName, income, expenses }: IMonthCardProps): JSX.Element => {
+  const { numberOfYear } = useTypedSelector(selectDate)
+
   const hasMonetaryTransactions: boolean = (income !== 0) && (expenses !== 0)
   return (
-    <Link href={`/${currentYear}/${name}`}>
-      <Card title={name} bordered={true} hoverable className='h-month-card'>
+    <Link href={`/${numberOfYear}/${monthName}`}>
+      <Card title={monthName} bordered hoverable className='h-month-card'>
         {
           hasMonetaryTransactions &&
             <div className='flex items-center justify-between w-full'>

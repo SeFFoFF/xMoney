@@ -8,7 +8,7 @@ async function getYear (year: number): Promise<IYear | null> {
   })
 
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error('Failed to fetch year')
   }
   return await res.json()
 }
@@ -18,7 +18,7 @@ const Year = async ({ params }): Promise<JSX.Element> => {
 
   return (
     <div className='year-screen'>
-      <MonthsGrid year={year} currentYear={params.year}/>
+      <MonthsGrid year={year} numberOfYear={parseInt(params.year)}/>
     </div>
   )
 }

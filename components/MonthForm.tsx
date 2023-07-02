@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from 'react'
 import { Button, InputNumber, Select, Typography } from 'antd'
-import dayjs from 'dayjs'
-import { getMonthNumber } from '@utils/getMonthNumber'
-import { useActions } from '@redux/hooks'
-import { type IHistory, type IMonth, type IYear } from '@interfaces'
+import { useActions, useTypedSelector } from '@redux/hooks'
+import { getMonthsWithNewExpense } from '@utils/getMonthsWithNewExpense'
+import { selectYear } from '@redux/features/year/year.slice'
 
 const { Title } = Typography
 const { Option } = Select
@@ -15,19 +14,21 @@ const isFieldsEmpty = (firstField, secondField): boolean => {
 }
 
 interface IMonthFormProps {
-  year: IYear | null
   dateInfo: {
     year: number
     month: string
   }
 }
 
-export const MonthForm = ({ year, dateInfo }: IMonthFormProps): JSX.Element => {
+export const MonthForm = ({ dateInfo }: IMonthFormProps): JSX.Element => {
   const [selectValue, setSelectValue] = useState(null)
   const [inputValue, setInputValue] = useState(0)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
-  const { addExpense } = useActions()
+  const { year } = useTypedSelector(selectYear)
+  const { addExpense, setNameOfMonth } = useActions()
+
+  setNameOfMonth(dateInfo.month)
 
   useEffect(() => {
     if (isFieldsEmpty(selectValue, inputValue)) setIsButtonDisabled(prevState => true)
@@ -35,50 +36,26 @@ export const MonthForm = ({ year, dateInfo }: IMonthFormProps): JSX.Element => {
   }, [selectValue, inputValue])
 
   const onClickButton = async (): Promise<void> => {
+    const { expense, months } = getMonthsWithNewExpense(year, dateInfo.month, selectValue, inputValue)
+
+    // TODO replace userId to real userId
+    const userId: string = '1'
+
     try {
-      const expense: IHistory = {
-        date: dayjs(),
-        category: selectValue,
-        amount: inputValue
-      }
-
-      const history: IHistory[] = [
-        expense,
-        ...year?.months[getMonthNumber(dateInfo.month)].history
-      ]
-
-      const monthInfo: { history: IHistory[] } = {
-        ...year?.months[getMonthNumber(dateInfo.month)],
-        history
-      }
-
-      const months: Array<{ history: IHistory[] } | IMonth> | undefined = year?.months.map(month => {
-        if (month.name === dateInfo.month) return monthInfo
-        return month
-      })
-
-      // TODO replace userId to real userId
-      const userId: string = '1'
-
-      try {
-        await fetch(`/api/${dateInfo.year}/${dateInfo.month}`, {
-          method: 'PUT',
-          body: JSON.stringify({
-            year: dateInfo.year,
-            months,
-            userId
-          })
+      await fetch(`/api/${dateInfo.year}/${dateInfo.month}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          year: dateInfo.year,
+          months,
+          userId
         })
-      } catch (error) {
-        console.error(error)
-      }
-
-      addExpense(expense)
-
-      setInputValue(0)
-    } catch (e) {
-      alert(e)
+      })
+    } catch (error) {
+      console.error(error)
     }
+
+    addExpense(expense)
+    setInputValue(0)
   }
 
   return (

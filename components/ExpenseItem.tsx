@@ -4,36 +4,68 @@ import React, { useEffect, useState } from 'react'
 import { message } from 'antd'
 import dayjs, { type Dayjs } from 'dayjs'
 import { InputWithUpdate } from '@components/InputWithUpdate'
+import { getMonthsWithUpdatedExpense } from '@utils/getMonthsWithUpdatedExpense'
+import { useTypedSelector } from '@redux/hooks'
+import { selectDate } from '@redux/features/date/date.slice'
+import { selectYear } from '@redux/features/year/year.slice'
+import { type IHistory } from '@interfaces'
 
 interface ExpenseItemProps {
+  item: IHistory
   date: Dayjs | string | number
   category: string
   amount: number
 }
 
-export const ExpenseItem = ({ category, date, amount }: ExpenseItemProps): JSX.Element => {
+export const ExpenseItem = ({ item, category, date, amount }: ExpenseItemProps): JSX.Element => {
   const [inputValue, setInputValue] = useState(amount)
   const [needToShowMessage, setNeedToShowMessage] = useState(false)
   const [messageApi, contextHolder] = message.useMessage()
 
   const formattedDate = dayjs(date).format('D MMMM')
 
+  const { year } = useTypedSelector(selectYear)
+  const { numberOfYear, nameOfMonth } = useTypedSelector(selectDate)
+
   useEffect(() => {
     const showSuccessMessage = async (): Promise<void> => {
       await messageApi.open({
         type: 'success',
-        content: 'Expense has been modified',
+        content: 'Expense has been changed',
         duration: 2
       })
     }
 
-    if (needToShowMessage) {
-      void showSuccessMessage()
+    const updateExpense = async (): Promise<void> => {
+      const months = getMonthsWithUpdatedExpense(year, nameOfMonth, item, inputValue)
+
+      // TODO replace userId to real userId
+      const userId: string = '1'
+
+      try {
+        await fetch(`/api/${numberOfYear}/${nameOfMonth}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+            year: numberOfYear,
+            months,
+            userId
+          })
+        })
+        await showSuccessMessage()
+      } catch (error) {
+        // TODO create error message
+        console.error(error)
+      }
+
       setNeedToShowMessage(prevState => false)
+    }
+
+    if (needToShowMessage) {
+      void updateExpense()
     }
   }, [needToShowMessage])
 
-  // TODO create UPDATE and DELETE logic
+  // TODO create DELETE logic
 
   return (
     <div className='w-full flex items-center justify-between'>
