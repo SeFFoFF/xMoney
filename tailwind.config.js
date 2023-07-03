@@ -27,7 +27,8 @@ module.exports = {
       },
       height: {
         'month-card': '125px',
-        header: '100px'
+        header: '100px',
+        '500px': '500px'
       },
       minHeight: {
         '360px': '360px'

@@ -1,29 +1,17 @@
 import React from 'react'
-import { MonthForm } from '@components/MonthForm'
-import { ExpensesHistory } from '@components/ExpensesHistory'
+import { MonthActions } from '@components/MonthActions'
+import { MonthStats } from '@components/MonthStats'
+import { MonthInfo } from '@components/MonthInfo'
 
-const Month = async ({ params }): Promise<JSX.Element> => {
-  const { year, month } = params
-
-  const dateInfo = {
-    year,
-    month
-  }
-
+const Month = async (): Promise<JSX.Element> => {
   return (
     <div className='month-screen h-full'>
       <div className='flex gap-[16px] h-full'>
-
-        <div className='flex flex-col gap-y-10 w-1/2 h-full bg-white rounded-lg p-24px'>
-          <MonthForm dateInfo={dateInfo} />
-          <ExpensesHistory dateInfo={dateInfo} />
+        <div className='flex flex-col gap-[16px] w-1/2 h-full overflow-hidden'>
+          <MonthInfo/>
+          <MonthActions/>
         </div>
-
-        <div className='w-1/2 h-full bg-white rounded-lg p-24px'>
-          {/* TODO create STATS */}
-          STATS
-        </div>
-
+        <MonthStats/>
       </div>
     </div>
   )

@@ -5,7 +5,6 @@ import { InputNumber } from 'antd'
 
 interface IInputProps {
   className: string
-  type: string
   defaultValue: number | null
   value: number
   setValue: (prevState: number) => void
@@ -33,7 +32,7 @@ export const InputWithUpdate = ({ className, defaultValue, value, setValue, setN
 
     if (isRequestToUpdate && !isInputValueEqualToInitialValue) {
       try {
-        setValue(newValue)
+        setValue(newValue === null ? 0 : newValue)
         setInitialValue(newValue)
         setNeedToShowMessage(prevState => true)
       } catch (error) {

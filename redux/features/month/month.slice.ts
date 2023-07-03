@@ -21,6 +21,9 @@ export const monthSlice = createSlice({
   reducers: {
     addExpense: (state: InitialMonthState, action: PayloadAction<IHistory>) => {
       state.month?.history?.unshift(action.payload)
+    },
+    updateIncome: (state: InitialMonthState, action: PayloadAction<number>) => {
+      state.month.income = action.payload
     }
   },
   extraReducers: builder => {

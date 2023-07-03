@@ -20,7 +20,7 @@ interface IMonthFormProps {
   }
 }
 
-export const MonthForm = ({ dateInfo }: IMonthFormProps): JSX.Element => {
+export const ExpensesForm = ({ dateInfo }: IMonthFormProps): JSX.Element => {
   const [selectValue, setSelectValue] = useState(null)
   const [inputValue, setInputValue] = useState(0)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)

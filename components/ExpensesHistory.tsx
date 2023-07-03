@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import { Button, List, Result } from 'antd'
 import { useTypedSelector, useActions } from '@redux/hooks'
-import { ExpenseItem } from '@components/ExpenseItem'
+import { ExpensesHistoryItem } from '@components/ExpensesHistoryItem'
 import { selectMonth } from '@redux/features/month/month.slice'
 import { useRouter } from '@node_modules/next/navigation'
 
@@ -33,14 +33,14 @@ export const ExpensesHistory = ({ dateInfo }: IExpensesHistoryProps): JSX.Elemen
   }
 
   return (
-    <div className='flex flex-col gap-1 h-max overflow-y-auto bg-white rounded-lg pr-3'>
+    <div className='flex flex-col gap-1 h-[500px] overflow-y-auto bg-white rounded-lg pr-3'>
       <List
         loading={isLoading}
         itemLayout="horizontal"
         dataSource={month?.history}
         renderItem={(item) => (
           <List.Item>
-            <ExpenseItem key={item._id ?? item.date} item={item} category={item.category} date={item.date} amount={item.amount}/>
+            <ExpensesHistoryItem key={item._id ?? item.date} item={item} category={item.category} date={item.date} amount={item.amount}/>
           </List.Item>
         )}
       />

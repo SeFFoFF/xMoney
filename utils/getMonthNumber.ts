@@ -1,5 +1,5 @@
 export const getMonthNumber = (month: string): number => {
-  switch (month.toLowerCase()) {
+  switch (month?.toLowerCase()) {
     case 'january':
       return 0
   case 'february':

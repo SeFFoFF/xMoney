@@ -17,7 +17,7 @@ interface ExpenseItemProps {
   amount: number
 }
 
-export const ExpenseItem = ({ item, category, date, amount }: ExpenseItemProps): JSX.Element => {
+export const ExpensesHistoryItem = ({ item, category, date, amount }: ExpenseItemProps): JSX.Element => {
   const [inputValue, setInputValue] = useState(amount)
   const [needToShowMessage, setNeedToShowMessage] = useState(false)
   const [messageApi, contextHolder] = message.useMessage()
@@ -41,6 +41,9 @@ export const ExpenseItem = ({ item, category, date, amount }: ExpenseItemProps):
 
       // TODO replace userId to real userId
       const userId: string = '1'
+
+      // TODO нужно делать проверку по месяцу, если сейчас июнь, то можно добавить только в июнь
+      // или какой-то аналог
 
       try {
         await fetch(`/api/${numberOfYear}/${nameOfMonth}`, {
@@ -73,7 +76,6 @@ export const ExpenseItem = ({ item, category, date, amount }: ExpenseItemProps):
       <p className='w-150px'>{category}</p>
       <strong>{formattedDate}</strong>
       <InputWithUpdate
-        type='number'
         className='w-100px'
         defaultValue={amount}
         value={inputValue}
