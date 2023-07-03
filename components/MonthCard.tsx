@@ -13,17 +13,23 @@ interface IMonthCardProps {
 const MonthCard = ({ monthName, income, expenses }: IMonthCardProps): JSX.Element => {
   const { numberOfYear } = useTypedSelector(selectDate)
 
-  const hasMonetaryTransactions: boolean = (income !== 0) && (expenses !== 0)
   return (
     <Link href={`/${numberOfYear}/${monthName}`}>
       <Card title={monthName} bordered hoverable className='h-month-card'>
-        {
-          hasMonetaryTransactions &&
-            <div className='flex items-center justify-between w-full'>
-              <p>+{income}</p>
-              <p>-{expenses}</p>
-            </div>
-        }
+        <div className='flex items-center justify-between w-full'>
+          <p>
+            {
+              income !== 0 &&
+              `+${income}`
+            }
+          </p>
+          <p>
+            {
+              expenses !== 0 &&
+              `-${expenses}`
+            }
+          </p>
+        </div>
       </Card>
     </Link>
   )

@@ -64,7 +64,7 @@ export const MonthInfo = (): JSX.Element => {
   }, [needToShowMessage])
 
   const renderMonthInfo = (): JSX.Element => {
-    if (isLoading) return <Skeleton.Input active block size='small' />
+    if (isLoading) return <Skeleton.Input active block size='default' />
 
     return (
       <>
