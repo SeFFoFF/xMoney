@@ -4,7 +4,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { store } from '@redux/store'
 import { Layout, theme } from 'antd'
-import { SideBar } from './SideBar'
+import { SideBar } from '@core/SideBar'
 
 const { Header, Content } = Layout
 
