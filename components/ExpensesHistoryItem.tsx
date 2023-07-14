@@ -5,7 +5,7 @@ import { message } from 'antd'
 import dayjs, { type Dayjs } from 'dayjs'
 import { InputWithUpdate } from '@components/InputWithUpdate'
 import { getMonthsWithUpdatedExpense } from '@utils/getMonthsWithUpdatedExpense'
-import { useTypedSelector } from '@redux/hooks'
+import { useActions, useTypedSelector } from '@redux/hooks'
 import { selectDate } from '@redux/features/date/date.slice'
 import { selectYear } from '@redux/features/year/year.slice'
 import { type IHistory } from '@interfaces'
@@ -24,6 +24,7 @@ export const ExpensesHistoryItem = ({ item, category, date, amount }: ExpenseIte
 
   const formattedDate = dayjs(date).format('D MMMM')
 
+  const { setYear } = useActions()
   const { year } = useTypedSelector(selectYear)
   const { numberOfYear, nameOfMonth } = useTypedSelector(selectDate)
 
@@ -53,6 +54,10 @@ export const ExpensesHistoryItem = ({ item, category, date, amount }: ExpenseIte
             months,
             userId
           })
+        })
+        setYear({
+          ...year,
+          months
         })
         await showSuccessMessage()
       } catch (error) {

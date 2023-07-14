@@ -2,6 +2,7 @@ import React from 'react'
 import MonthsGrid from '@components/MonthsGrid'
 import { type IYear } from '@interfaces'
 
+// TODO считать затраты за каждый месяц и при добавлении затраты обновлять стор
 async function getYear (year: number): Promise<IYear | null> {
   const res = await fetch(`http://localhost:3000/api/${year}`, {
     cache: 'no-store'
